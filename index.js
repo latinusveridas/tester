@@ -14,7 +14,7 @@ app.get('/new', function (req,res) {
 	var location = "fr"
     
 	DB.ConnectToDB(unikPool).then(currCon => {
-		
+		console.log("OK CON")
 		var sql = `SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id`
 		
 		DB.GoQuery(currCon,sql).then(resultPost => {
