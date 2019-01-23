@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "artillery": "^1.6.0-26",
     "express": "latest",
     "multer": "latest",
+    "mysql": "latest",
     "path": "latest"
   }
 }
