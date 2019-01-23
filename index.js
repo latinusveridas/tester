@@ -10,6 +10,8 @@ var unikPool = DB.CreatePool("fr").then(unik => {
 })
 
 app.get('/new', function (req,res) {
+	
+	var location = "fr"
     
 	DB.ConnectToDB(unikPool).then(currCon => {
 		
@@ -23,7 +25,7 @@ app.get('/new', function (req,res) {
 		res.status(200).send(resultPost)
 
 		}) //GoQuery Select
-	//currCon.release()
+	currCon.release()
 	}) // GetConnection
 
 })
