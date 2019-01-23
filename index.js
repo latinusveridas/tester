@@ -30,11 +30,6 @@ app.post('/upload', function (req,res) {
 
 }) // upload
 
-
-app.listen(3002, function (res,req) {
-console.log("TESTER LAUNCH")
-})
-
 // Functions Multer
 
 // Set The Storage Engine
@@ -68,3 +63,34 @@ function checkFileType(file, cb){
   // Return value	
   if(mimetype && extname) {return cb(null,true) } else {cb('Error: Images Only!')}
 }
+
+var DB = require('../Database/database');
+
+app.get('/innerjoin', function(req,res) {
+
+	//Debug
+    var location = "fr"
+    
+	DB.CreatePool(location).then(currPool => {
+	DB.ConnectToDB(currPool).then(currCon => {
+		
+		var sql = `SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id`
+		
+		DB.GoQuery(currCon,sql).then(resultPost => {
+		
+		//var packetStr = JSON.stringify(resultPost)
+		//var packetStr = JSON.parse(packetStr)
+		//console.log(resultPost)
+		res.status(200).send(resultPost)
+
+		}) //GoQuery Select
+	currCon.release()
+	}) // GetConnection
+
+	}) // CreatePool
+
+}) // Appget
+
+app.listen(3002, function (res,req) {
+console.log("TESTER LAUNCH")
+})
