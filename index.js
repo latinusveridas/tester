@@ -19,7 +19,7 @@ app.get('/new', function (req,res) {
 		
 		//var packetStr = JSON.stringify(resultPost)
 		//var packetStr = JSON.parse(packetStr)
-		//console.log(resultPost)
+		console.log("Result sent to ", req.ip)
 		res.status(200).send(resultPost)
 
 		}) //GoQuery Select
