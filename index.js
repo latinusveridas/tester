@@ -5,7 +5,7 @@ var path = require('path')
 
 var DB = require('./Database/database');
 
-var unikCon = DB.pool.getConnection()
+//var unikCon = DB.pool.getConnection()
 
 app.get('/new', function (req,res) {
 	
