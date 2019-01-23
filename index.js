@@ -3,6 +3,8 @@ var app = express()
 var multer = require('multer');
 var path = require('path')
 
+var DB = require('./Database/database');
+
 app.post('/upload', function (req,res) {
 
   upload(req, res, (err) => {
@@ -64,7 +66,7 @@ function checkFileType(file, cb){
   if(mimetype && extname) {return cb(null,true) } else {cb('Error: Images Only!')}
 }
 
-var DB = require('../Database/database');
+
 
 app.get('/innerjoin', function(req,res) {
 
