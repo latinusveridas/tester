@@ -5,19 +5,29 @@ var path = require('path')
 
 var DB = require('./Database/database');
 
-var unikCon = DB.pool.getConnection()
+var unikPool = DB.CreatePool(fr).then(unik => {
+	return (unik)
+})
 
 app.get('/new', function (req,res) {
 	
-	var location = "fr"
-	var sql = `SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id`
-	
-	unikCon.query(sql, function (err,rows,field) {
-	if (err) {res.send(err)} else {
-		res.status(200).send(rows)
-		unikCon.release()
-	}
-	})
+	//Debug
+    var location = "fr"
+    
+	DB.ConnectToDB(unikPool).then(currCon => {
+		
+		var sql = `SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id`
+		
+		DB.GoQuery(currCon,sql).then(resultPost => {
+		
+		//var packetStr = JSON.stringify(resultPost)
+		//var packetStr = JSON.parse(packetStr)
+		//console.log(resultPost)
+		res.status(200).send(resultPost)
+
+		}) //GoQuery Select
+	//currCon.release()
+	}) // GetConnection
 
 })
 
