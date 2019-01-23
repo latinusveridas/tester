@@ -5,14 +5,11 @@ var path = require('path')
 
 var DB = require('./Database/database');
 
-var unikPool = DB.CreatePool(fr).then(unik => {
+var unikPool = DB.CreatePool("fr").then(unik => {
 	return (unik)
 })
 
 app.get('/new', function (req,res) {
-	
-	//Debug
-    var location = "fr"
     
 	DB.ConnectToDB(unikPool).then(currCon => {
 		
