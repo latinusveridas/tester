@@ -68,6 +68,20 @@ function checkFileType(file, cb){
 
 var unikCon = pool.getConnection()
 
+app.get('/new', function (req,res) {
+	
+	var location = "fr"
+	var sql = `SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id`
+	
+	unikCon.query(sql, function (err,rows,field) {
+	if (err) {res.send(err)} else {
+		res.status(200).send(rows)
+		unikCon.release()
+	}
+	})
+
+})
+
 
 app.get('/innerjoin', function(req,res) {
 
