@@ -66,7 +66,7 @@ function checkFileType(file, cb){
   if(mimetype && extname) {return cb(null,true) } else {cb('Error: Images Only!')}
 }
 
-var unikCon = pool.getConnection()
+var unikCon = DB.pool.getConnection()
 
 app.get('/new', function (req,res) {
 	
