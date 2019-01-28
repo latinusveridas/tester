@@ -6,6 +6,7 @@ var path = require('path')
 var DB = require('./Database/database');
 
 var unikPool = DB.CreatePool("fr").then(unik => {
+	console.log(unik)
 	return (unik)
 })
 
