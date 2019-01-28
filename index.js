@@ -5,9 +5,7 @@ var path = require('path')
 
 var DB = require('./Database/database');
 
-var unikPool = DB.CreatePool("fr").then(unik => {
-	return (unik)
-})
+var unikPool = DB.BasePool("fr")
 
 app.get('/new', function (req,res) {
 		
