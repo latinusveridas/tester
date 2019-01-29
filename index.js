@@ -6,7 +6,7 @@ var path = require('path')
 var DB = require('./Database/database');
 
 var unikPool = DB.BasePool("fr")
-var auto_collec_func = setInterval(function() { MainCollect("fr") }, 3000)
+var auto_collec_func = setInterval(function() { MainCollect("fr") }, 4000) // Refresh with interval 4 seconds
 var curr_events = ""
 
 app.get('/new', function (req,res) {
