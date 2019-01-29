@@ -10,9 +10,8 @@ var auto_collec_func = setInterval(function() { MainCollect("fr") }, 3000)
 var curr_events = ""
 
 app.get('/new', function (req,res) {
-	console.log(auto_collected_events)
-		
-	res.status(200).send(auto_collected_events)
+	
+	res.status(200).send(curr_events)
 
 })
 
