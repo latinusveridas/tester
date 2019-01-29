@@ -6,16 +6,11 @@ var path = require('path')
 var DB = require('./Database/database');
 
 var unikPool = DB.BasePool("fr")
+var auto_collected_events = setInterval(MainCollect("fr"), 2000)
 
 app.get('/new', function (req,res) {
 		
-	var location = "fr"
-	var sql = `SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id`
-
-	DB.GoQuery(unikPool,sql).then(resultPost => {
-	console.log("Result sent to ", req.ip)
-	res.status(200).send(resultPost)
-	}) 
+	res.status(200).send(auto_collected_events)
 
 })
 
@@ -48,6 +43,18 @@ app.get('/innerjoin', function(req,res) {
 app.listen(3002, function (res,req) {
 console.log("TESTER LAUNCH")
 })
+
+// ===================== AUTOMATIC FUNCTIONS ===========================
+
+function MainCollect(location) {
+	
+	var sql = `SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id`
+
+	DB.GoQuery(unikPool,sql).then(resultPost => {
+	return(resultPost)
+	}) 
+
+}
 
 /*
 app.post('/upload', function (req,res) {
