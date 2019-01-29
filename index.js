@@ -9,6 +9,7 @@ var unikPool = DB.BasePool("fr")
 var auto_collected_events = setInterval(function() { MainCollect("fr") }, 2000)
 
 app.get('/new', function (req,res) {
+	console.log(auto_collected_events)
 		
 	res.status(200).send(auto_collected_events)
 
